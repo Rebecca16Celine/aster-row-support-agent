@@ -33,7 +33,7 @@ from system_prompt import SYSTEM_PROMPT
 load_dotenv()  # reads .env in the project root, if present
 
 
-MODEL_NAME = "gemini-3.6-flash"
+MODEL_NAME = "gemini-3.5-flash-lite"
 
 # ---- Logging (observability) ----------------------------------------------
 # Plain structured logs to stderr as JSON lines, so stdout stays clean for
