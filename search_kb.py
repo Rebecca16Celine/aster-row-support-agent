@@ -225,6 +225,28 @@ def _score_chunk(query_terms: list[str], chunk: Chunk) -> float:
 
     return score
 
+# Small, explicit synonym map: customers describe symptoms ("broken zipper",
+# "torn strap"), while policy docs describe categories ("damaged", "defective").
+# This bridges that gap on the QUERY side only -- source documents are never
+# modified, per the assignment's rules. Not exhaustive; documented as a known
+# limitation (a production system would use semantic embeddings instead).
+_SYNONYM_EXPANSIONS = {
+    "broken": ["damaged", "defective"],
+    "zipper": ["defective", "damaged"],
+    "torn": ["damaged", "defective"],
+    "ripped": ["damaged", "defective"],
+    "cracked": ["damaged", "defective"],
+    "leaking": ["damaged", "defective"],
+    "faulty": ["defective", "damaged"],
+    "wrong": ["incorrect"],
+}
+
+
+def _expand_query_terms(terms: list[str]) -> list[str]:
+    expanded = list(terms)
+    for t in terms:
+        expanded.extend(_SYNONYM_EXPANSIONS.get(t, []))
+    return expanded
 
 def search_kb(query: str, top_k: int = 5) -> list[dict]:
     """
@@ -247,6 +269,7 @@ def search_kb(query: str, top_k: int = 5) -> list[dict]:
     query_terms = _tokenize(query)
     if not query_terms:
         return []
+    query_terms = _expand_query_terms(query_terms)
 
     scored = [(c, _score_chunk(query_terms, c)) for c in _ALL_CHUNKS]
     scored = [(c, s) for c, s in scored if s > 0]

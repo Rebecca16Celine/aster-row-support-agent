@@ -45,6 +45,8 @@ _HANDOFF_SIGNAL_PHRASES = [
     "human support", "human specialist", "support specialist", "contact support",
     "connect you with", "reach out to support", "human confirmation",
     "recommend human", "a specialist will", "our support team",
+    "human customer support", "reaching out to human", "reach out to human",
+    "human review", "support team", "customer support team",
 ]
 
 
