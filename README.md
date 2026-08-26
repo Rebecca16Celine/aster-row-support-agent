@@ -3,9 +3,7 @@
 A reliability-focused RAG customer support agent built for the AI Agent Intern take-home assignment. It answers policy questions grounded in a markdown knowledge base, looks up order status via a tool call, maintains multi-turn conversation context, and is designed to resist prompt injection, protect customer privacy, and abstain or hand off to a human rather than guess.
 
 ## Demo
-
-*(GIF/video link goes here once recorded — see "Known limitations" for what's covered.)*
-
+https://github.com/user-attachments/assets/a809c460-f9fc-4595-b83d-eca625215358
 ---
 
 ## Setup
